@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  registry-db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: container_registry
+      POSTGRES_USER: registry_user
+      POSTGRES_PASSWORD: registry_password
+    volumes:
+      - registry_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U registry_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  registry-redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  hyperregistry:
+    build:
+      context: ../hyperregistry/rust-registry
+      dockerfile: ../Containerfile
+    depends_on:
+      registry-db:
+        condition: service_healthy
+      registry-redis:
+        condition: service_started
+    environment:
+      - REGISTRY_HTTP_ADDR=0.0.0.0:5000
+      - REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/tmp/registry
+      - REGISTRY_DATABASE_URL=postgresql://registry_user:registry_password@registry-db:5432/container_registry
+      - REGISTRY_REDIS_URL=redis://registry-redis:6379
+      - REGISTRY_GC_ENABLED=true
+      - REGISTRY_FEATURES_TAG_DELETE=true
+      - REGISTRY_FEATURES_MANIFEST_LIST_SUPPORT=true
+    ports:
+      - "5000:5000"
+    volumes:
+      - registry_storage:/tmp/registry
+
+  hyperbuild:
+    build:
+      context: .
+      dockerfile: Containerfile
+    volumes:
+      - ./examples:/workspace/examples
+      - build_output:/workspace/build-output
+    depends_on:
+      - hyperregistry
+    command: >
+      sh -c "
+        echo 'Hyperbuild container started.' &&
+        echo 'To build an image, run:' &&
+        echo 'hyperbuild -c /workspace/examples/my-app -f /workspace/examples/my-app/Dockerfile -i hyperregistry:5000/my-app:latest' &&
+        sleep infinity
+      "
+
+volumes:
+  registry_db_data:
+  registry_storage:
+  build_output:

@@ -1,0 +1,104 @@
+# Hyperbuild + Hyperregistry Essential TODO List
+
+## Priority 1: Core Push/Pull Functionality
+
+### Hyperbuild Push Implementation
+- [x] Implement push command in hyperbuild CLI
+- [x] Add registry client to hyperbuild with Docker Registry API v2 support
+- [x] Implement authenticate with hyperregistry (anonymous/basic auth)
+- [x] Implement initiate blob upload API call
+- [x] Implement upload blob chunks API call
+- [x] Implement complete blob upload API call
+- [x] Implement upload manifest API call
+- [x] Implement proper digest calculation for layers and manifests
+- [x] Add progress reporting for push operations
+- [x] Test push functionality with simple Dockerfile
+
+### Hyperregistry API Implementation
+- [x] Complete registry server startup in main.rs
+- [x] Implement blob upload endpoints (/v2/name/blobs/uploads)
+- [x] Implement manifest upload endpoints (/v2/name/manifests/reference)
+- [ ] Implement blob download endpoints (/v2/name/blobs/digest)
+- [ ] Implement manifest download endpoints (/v2/name/manifests/reference)
+- [x] Implement proper storage backend for blobs and manifests
+- [ ] Add database integration for metadata tracking
+- [ ] Test registry endpoints with curl/httpie
+
+### Pull Implementation
+- [ ] Implement pull command in hyperbuild CLI
+- [ ] Implement manifest download functionality
+- [ ] Implement blob download functionality
+- [ ] Implement image assembly from downloaded layers
+- [ ] Test pull functionality
+
+## Priority 2: Image Format Compatibility
+
+- [ ] Ensure OCI-compliant image generation in hyperbuild
+- [ ] Validate generated manifests against OCI spec
+- [ ] Test compatibility with Docker runtime
+- [ ] Test compatibility with Podman
+- [ ] Fix any format incompatibilities
+
+## Priority 3: Basic Registry Features
+
+- [ ] Implement repository creation/management
+- [ ] Implement tag management
+- [ ] Implement manifest list support
+- [ ] Add proper error responses matching Docker registry API
+- [ ] Implement registry ping endpoint (/v2/)
+
+## Priority 4: Testing & Validation
+
+- [x] Create test Dockerfile for validation
+- [x] Build image with hyperbuild
+- [x] Push image to hyperregistry
+- [ ] Pull image from hyperregistry with Docker
+- [ ] Run pulled image to verify functionality
+- [ ] Test with multi-stage Dockerfile
+- [ ] Test with multi-platform considerations
+
+## Priority 5: Error Handling & Robustness
+
+- [ ] Add proper error handling to all registry endpoints
+- [ ] Implement request validation
+- [ ] Add timeout handling for long operations
+- [ ] Implement retry logic for failed operations
+- [ ] Add proper logging for debugging
+
+## Priority 6: Security & Validation
+
+- [ ] Validate image content before accepting push
+- [ ] Implement proper authentication (even basic for now)
+- [ ] Add input sanitization
+- [ ] Test with malicious inputs
+- [ ] Verify digest integrity during push/pull
+
+## Priority 7: Performance & Efficiency
+
+- [ ] Implement layer deduplication
+- [ ] Add compression for data transfer
+- [ ] Optimize storage efficiency
+- [ ] Test with reasonably sized images (100MB+)
+
+## Priority 8: Integration Testing
+
+- [ ] Full end-to-end test: Build → Push → Pull → Run
+- [ ] Test with different base images (alpine, ubuntu, etc.)
+- [ ] Test concurrent push/pull operations
+- [ ] Test registry restart scenarios
+- [ ] Test hyperbuild restart scenarios
+
+## Priority 9: Documentation & Examples
+
+- [ ] Document the complete workflow
+- [ ] Create example Dockerfiles for testing
+- [ ] Document troubleshooting steps
+- [ ] Create quick start guide
+
+## Priority 10: Cleanup & Polish
+
+- [ ] Remove any placeholder implementations
+- [ ] Add proper error messages
+- [ ] Improve logging messages
+- [ ] Add configuration options
+- [ ] Final end-to-end test

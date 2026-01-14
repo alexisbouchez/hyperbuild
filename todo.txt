@@ -1,0 +1,122 @@
+# BuildKit Features List
+
+## Core Architecture
+- [ ] Pluggable architecture with multiple worker backends (OCI/runc, containerd)
+- [ ] Distributed worker support with multiple worker instances
+- [ ] gRPC-based API for communication between client and daemon
+- [ ] Support for multiple platforms and cross-compilation
+- [ ] Worker selection and load balancing capabilities
+
+## Build Graph & LLB (Low-Level Builder)
+- [ ] LLB (Low-Level Builder) intermediate representation
+- [ ] Binary format for defining dependency graphs
+- [ ] Concurrent execution of build steps
+- [ ] Efficient instruction caching mechanism
+- [ ] Support for complex build graphs with dependencies
+- [ ] Marshal/unmarshal as Protobuf messages
+
+## Frontend Support
+- [ ] Dockerfile frontend (dockerfile.v0)
+- [ ] Gateway frontend (gateway.v0) for external frontends
+- [ ] Support for custom frontends via plugins
+- [ ] Multiple high-level language support (Dockerfile, Buildpacks, HLB, Earthly, etc.)
+- [ ] External frontend integration capabilities
+
+## Caching System
+- [ ] Automatic garbage collection of build cache
+- [ ] Instruction-level caching with content-addressable storage
+- [ ] Build cache import/export functionality
+- [ ] Multiple cache exporters (inline, registry, local, GHA, S3, Azure Blob)
+- [ ] Cache modes (min/max) for different export strategies
+- [ ] Consistent hashing for distributed caching
+- [ ] Layer reuse optimization
+
+## Security Features
+- [ ] Execution without root privileges (rootless mode)
+- [ ] Secure by default with sandboxed containers
+- [ ] Support for untrusted sources with security boundaries
+- [ ] Entitlement system for privileged operations (network.host, security.insecure)
+- [ ] Credential isolation and protection
+- [ ] Policy enforcement capabilities
+
+## Output Formats
+- [ ] Image/Registry output with push capabilities
+- [ ] Local directory export
+- [ ] Docker tarball format
+- [ ] OCI tarball format
+- [ ] Containerd image store integration
+- [ ] Multiple output format support
+
+## Networking
+- [ ] Support for different networking modes (auto, bridge, host, none)
+- [ ] CNI plugin support
+- [ ] Network namespace isolation
+- [ ] TCP service exposure with TLS support
+
+## Performance Optimizations
+- [ ] Concurrent dependency resolution
+- [ ] Efficient instruction caching
+- [ ] Layer reuse and deduplication
+- [ ] Parallel execution of independent build steps
+- [ ] Memory-efficient processing
+
+## Multi-platform Builds
+- [ ] Cross-platform compilation support
+- [ ] Platform-specific build variants
+- [ ] Multi-architecture image creation
+- [ ] Platform-aware layer selection
+
+## Debugging & Monitoring
+- [ ] OpenTelemetry support for tracing
+- [ ] Detailed build progress reporting
+- [ ] Debug output and trace logging
+- [ ] Metrics collection and export
+- [ ] Health check endpoints
+
+## Configuration & Deployment
+- [ ] TOML-based configuration file support
+- [ ] Systemd socket activation
+- [ ] Containerized deployment options
+- [ ] Daemonless mode for ephemeral builds
+- [ ] Environment variable configuration
+
+## Advanced Features
+- [ ] Build secrets support
+- [ ] SSH forwarding for builds
+- [ ] Cache mounts for speeding up builds
+- [ ] Build args and labels
+- [ ] Target-specific builds (multi-stage)
+- [ ] Conditional execution support
+
+## Integration Capabilities
+- [ ] Docker BuildKit integration (DOCKER_BUILDKIT=1)
+- [ ] Docker buildx integration
+- [ ] Kubernetes deployment examples
+- [ ] Podman and Nerdctl support
+- [ ] CI/CD pipeline integration
+
+## Experimental Features
+- [ ] S3 cache backend
+- [ ] Azure Blob Storage cache backend
+- [ ] GitHub Actions cache backend
+- [ ] estargz compression support
+- [ ] Zstd compression support
+
+## Metadata & Provenance
+- [ ] Build metadata output
+- [ ] Image digest reporting
+- [ ] Annotation support for images
+- [ ] Reproducible builds with SOURCE_DATE_EPOCH
+- [ ] Build provenance generation
+
+## Resource Management
+- [ ] Disk space management with garbage collection
+- [ ] Memory usage optimization
+- [ ] CPU and I/O resource controls
+- [ ] Lease management for resources
+
+## Client Features
+- [ ] buildctl command-line client
+- [ ] Build from source code to artifacts
+- [ ] Connection to remote buildkitd daemons
+- [ ] Support for different transport protocols (unix socket, TCP, container)

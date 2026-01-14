@@ -1,0 +1,224 @@
+# Hyperbuild + Hyperregistry Integration TODO List
+
+## Phase 1: Core Functionality Implementation
+
+### Hyperbuild Enhancements
+- [ ] Implement proper Dockerfile parsing with all common instructions (FROM, RUN, COPY, ADD, ENV, etc.)
+- [ ] Implement actual execution of RUN commands (currently simulated)
+- [ ] Implement proper handling of build contexts and file copying
+- [ ] Implement multi-stage build support
+- [ ] Implement build argument and environment variable support
+- [ ] Implement proper layer caching mechanism
+- [ ] Implement proper image manifest generation compliant with OCI specification
+- [ ] Implement proper image configuration generation
+- [ ] Add compression support for layers (gzip, zstd)
+- [ ] Implement proper error handling throughout the build process
+
+### Registry Client for Hyperbuild
+- [ ] Create registry client module in hyperbuild
+- [ ] Implement Docker Registry HTTP API v2 client
+- [ ] Implement authentication support (basic, token, JWT)
+- [ ] Implement blob upload functionality
+- [ ] Implement manifest upload functionality
+- [ ] Implement proper digest calculation and verification
+- [ ] Add retry logic for failed uploads
+- [ ] Add support for chunked uploads for large layers
+- [ ] Implement registry ping/health check functionality
+
+### Hyperregistry Implementation
+- [ ] Complete the registry server implementation in main.rs
+- [ ] Implement proper routing using Axum
+- [ ] Implement database schema and migrations
+- [ ] Implement proper database models for repositories, manifests, tags, blobs
+- [ ] Implement SQL queries for all CRUD operations
+- [ ] Implement proper storage backend (filesystem, S3, etc.)
+- [ ] Implement garbage collection functionality
+- [ ] Implement proper authentication and authorization
+- [ ] Implement rate limiting
+- [ ] Add comprehensive logging and monitoring
+- [ ] Implement metrics collection
+- [ ] Add proper error handling and validation
+- [ ] Implement security scanning hooks (future enhancement)
+
+## Phase 2: Integration Features
+
+### Push Command Implementation
+- [ ] Add push subcommand to hyperbuild CLI
+- [ ] Implement image serialization to OCI format
+- [ ] Implement proper layer deduplication
+- [ ] Implement manifest validation before push
+- [ ] Add progress reporting during push operations
+- [ ] Implement resume capability for interrupted pushes
+- [ ] Add support for concurrent layer uploads
+
+### Pull Command Implementation
+- [ ] Add pull subcommand to hyperbuild CLI
+- [ ] Implement manifest download and parsing
+- [ ] Implement layer download and extraction
+- [ ] Implement proper image assembly from layers
+- [ ] Add support for pulling multi-platform images
+- [ ] Add support for image verification
+
+### Cross-Compatibility
+- [ ] Ensure OCI compliance for both hyperbuild and hyperregistry
+- [ ] Test compatibility with Docker and other container runtimes
+- [ ] Implement conversion between Docker and OCI formats if needed
+- [ ] Add support for Docker manifest lists
+- [ ] Test with popular container tools (podman, crane, etc.)
+
+## Phase 3: Testing and Validation
+
+### Unit Tests
+- [ ] Add unit tests for Dockerfile parsing
+- [ ] Add unit tests for build engine
+- [ ] Add unit tests for storage management
+- [ ] Add unit tests for registry API endpoints
+- [ ] Add unit tests for database operations
+- [ ] Add unit tests for storage backends
+- [ ] Add unit tests for authentication
+
+### Integration Tests
+- [ ] Create integration tests for complete build process
+- [ ] Create integration tests for push functionality
+- [ ] Create integration tests for pull functionality
+- [ ] Create end-to-end tests with real Dockerfiles
+- [ ] Test multi-stage builds
+- [ ] Test concurrent operations
+- [ ] Test error conditions and recovery
+
+### Performance Tests
+- [ ] Benchmark build performance
+- [ ] Benchmark registry operations
+- [ ] Test with large images
+- [ ] Test with many concurrent requests
+- [ ] Profile memory and CPU usage
+- [ ] Optimize slow operations
+
+## Phase 4: Security and Reliability
+
+### Security Features
+- [ ] Implement proper input validation
+- [ ] Add protection against path traversal attacks
+- [ ] Implement secure temporary file handling
+- [ ] Add support for signed manifests
+- [ ] Implement content trust mechanisms
+- [ ] Add security scanning integration
+- [ ] Perform security audit of dependencies
+
+### Reliability Features
+- [ ] Add graceful shutdown handling
+- [ ] Implement proper signal handling
+- [ ] Add backup and restore functionality
+- [ ] Implement disaster recovery procedures
+- [ ] Add comprehensive monitoring and alerting
+- [ ] Implement circuit breaker patterns
+- [ ] Add health check endpoints
+
+## Phase 5: Documentation and Examples
+
+### Documentation
+- [ ] Write comprehensive API documentation
+- [ ] Create user guides for common workflows
+- [ ] Document configuration options
+- [ ] Create troubleshooting guides
+- [ ] Write migration guides if applicable
+- [ ] Create architecture documentation
+- [ ] Document security best practices
+
+### Examples
+- [ ] Create example Dockerfiles for testing
+- [ ] Create example applications to build
+- [ ] Create example deployment configurations
+- [ ] Create CI/CD pipeline examples
+- [ ] Create monitoring and logging examples
+- [ ] Create backup and maintenance examples
+
+## Phase 6: Deployment and Operations
+
+### Container Images
+- [ ] Create optimized production container images
+- [ ] Implement multi-architecture support
+- [ ] Add proper labels and metadata to images
+- [ ] Implement image signing
+- [ ] Create Helm charts for Kubernetes deployment
+- [ ] Create Docker Compose examples
+
+### Infrastructure
+- [ ] Create Terraform modules for cloud deployment
+- [ ] Create Ansible playbooks for server deployment
+- [ ] Implement configuration management
+- [ ] Create backup automation scripts
+- [ ] Implement monitoring stack integration
+- [ ] Create log aggregation setup
+
+## Phase 7: Advanced Features
+
+### Build Features
+- [ ] Implement remote build context support
+- [ ] Add build secrets support
+- [ ] Implement build cache export/import
+- [ ] Add support for custom build platforms
+- [ ] Implement incremental builds
+- [ ] Add support for build provenance
+
+### Registry Features
+- [ ] Implement replication between registries
+- [ ] Add support for proxy caches
+- [ ] Implement image mirroring
+- [ ] Add support for image retention policies
+- [ ] Implement quota management
+- [ ] Add support for image scanning results
+- [ ] Implement webhook notifications
+
+## Phase 8: Quality Assurance
+
+### Code Quality
+- [ ] Implement comprehensive linting
+- [ ] Add code formatting enforcement
+- [ ] Implement automated code review
+- [ ] Add performance regression tests
+- [ ] Conduct code reviews for all major features
+- [ ] Implement static analysis tools
+
+### Release Process
+- [ ] Create release automation scripts
+- [ ] Implement semantic versioning
+- [ ] Create changelog generation
+- [ ] Implement automated testing for releases
+- [ ] Create release verification procedures
+- [ ] Document deprecation policies
+
+## Phase 9: Community and Ecosystem
+
+### Community
+- [ ] Create contribution guidelines
+- [ ] Set up issue templates
+- [ ] Create pull request templates
+- [ ] Document development workflow
+- [ ] Create code of conduct
+- [ ] Set up community channels
+
+### Ecosystem
+- [ ] Create plugins/extensions architecture
+- [ ] Implement hooks for custom functionality
+- [ ] Create SDK for external integrations
+- [ ] Add support for third-party authentication
+- [ ] Create marketplace for extensions
+
+## Phase 10: Maintenance and Evolution
+
+### Monitoring
+- [ ] Set up continuous integration
+- [ ] Implement automated testing pipeline
+- [ ] Create performance monitoring
+- [ ] Implement security scanning pipeline
+- [ ] Set up dependency update automation
+- [ ] Create release automation
+
+### Evolution Planning
+- [ ] Create roadmap document
+- [ ] Plan for next major version
+- [ ] Gather user feedback mechanisms
+- [ ] Plan for new technology adoption
+- [ ] Evaluate emerging standards
+- [ ] Plan for scalability improvements
